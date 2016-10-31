@@ -1,3 +1,5 @@
+require_relative '../spec_helper'
+
 feature 'user can sign up' do
   scenario 'I can sign up as a new user' do
     sign_up
