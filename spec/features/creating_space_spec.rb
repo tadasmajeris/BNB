@@ -23,7 +23,7 @@ feature 'creating a new space' do
 		expect(page).to have_content('Name must not be blank')
 		expect(page).to have_content('Description must not be blank')
 		expect(page).to have_content('Price must not be blank')
-		expect(page).to have_content('Available_from must not be blank')
-		expect(page).to have_content('Avaiable_to must not be blank')
+		expect(page).to have_content('Available from must not be blank')
+		expect(page).to have_content('Available to must not be blank')
 	end
 end
