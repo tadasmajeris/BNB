@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Makers BnB</title>
+</head>
+<body>
+  <p>Welcome, <%= @user.email %>!</p>
+  <% if flash[:errors] && !flash[:errors].empty? %>
+  <ul class="errors">
+    <% flash[:errors].each do |error| %>
+    <li><%= error %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  <%= yield %>
+</body>
+</html>
