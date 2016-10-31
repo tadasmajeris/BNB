@@ -1,1 +1,47 @@
-List a space
+<style>
+	h1 {
+		text-align: center;
+	}
+
+	.form_container {
+		width: 90%;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	form {
+		width: 50%;
+		margin: auto;
+	}
+
+	form input, label, textarea {
+		display: block;
+		margin: auto;
+	}
+
+</style>
+
+
+<h1>List a Space</h1>
+
+<div class="form_container">
+	<form action="/spaces" method="post">
+		<label for="name">Name:
+			<input type="text" name="name">
+		</label>
+		<label for="description">Description:
+			<textarea name="description"></textarea>
+		</label>
+		<label for="price_per_night">Price per Night:
+			<input type="text" name="price_per_night">
+		</label>
+		<label for="available_from">Available From:
+			<input type="text" name="available_from" placeholder="dd/mm/yyyy">
+		</label>
+		<label for="available_to">Available To:
+			<input type="text" name="available_to" placeholder="dd/mm/yyyy">
+		</label>
+		<input type="submit" value="List My Space">
+	</form>
+</div>
+

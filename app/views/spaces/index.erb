@@ -1,1 +1,17 @@
-Spaces list
+<h1>Book a Space</h1>
+
+
+<ul id="spaces">
+	
+	<% @spaces.each do |space| %>
+
+		<li>
+			<p class="space_name"><%= space.name %></p>
+			<p class="space_description"><%= space.description %></p>
+			<p class="space_price">£<%= space.price %></p>
+			<p class="space_available_from"><%= space.available_from.strftime("%d/%m/%Y") %></p>
+			<p class="space_available_to"><%= space.available_to.strftime("%d/%m/%Y") %></p>
+		</li>
+
+	<% end %>
+</ul>
