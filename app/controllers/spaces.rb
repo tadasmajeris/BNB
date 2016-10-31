@@ -11,8 +11,12 @@ class Bnb < Sinatra::Base
   							 price: params[:price_per_night],
   							 available_from: params[:available_from],
   							 available_to: params[:available_to])
-  	space.save
-  	redirect '/spaces'
+  	if space.save
+  		redirect '/spaces'
+  	else
+  		flash.now[:errors] = space.errors.full_messages
+  	end
+  	erb :'/spaces/new'
   end
 
   get '/spaces/new' do
