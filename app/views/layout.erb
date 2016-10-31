@@ -4,7 +4,9 @@
   <title>Makers BnB</title>
 </head>
 <body>
-  <p>Welcome example@mail.com!</p>
+  <% if current_user %>
+  Welcome <%= current_user.email %>!
+  <% end %>
   <% if flash[:errors] && !flash[:errors].empty? %>
   <ul class="errors">
     <% flash[:errors].each do |error| %>

@@ -15,6 +15,7 @@ class Bnb < Sinatra::Base
   use Rack::MethodOverride
   register Sinatra::Flash
   enable :sessions
+  set :session_secret, 'super secret'
 
   get '/' do
     redirect '/users/new'
@@ -25,7 +26,7 @@ class Bnb < Sinatra::Base
       @current_user ||= User.get(session[:user_id])
     end
   end
-  
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
