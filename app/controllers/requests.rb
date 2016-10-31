@@ -1,4 +1,4 @@
-class BNB < Sinatra::Base
+class Bnb < Sinatra::Base
 
   get '/requests' do
     erb :'/requests/index'

@@ -1,4 +1,4 @@
-class BNB < Sinatra::Base
+class Bnb < Sinatra::Base
 
   get '/users/new' do
     erb :'/users/new'
