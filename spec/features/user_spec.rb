@@ -11,10 +11,13 @@ feature 'user can sign up' do
     sign_up
     expect(User.first.email).to eq('example@mail.com')
   end
+
   scenario 'user can not sign up if passwords do not match' do
     expect {sign_up(password_confirmation: 'wrong')}.not_to change(User, :count)
   end
+
   scenario 'user can not sign up with an invalid email' do
     expect {sign_up(password_confirmation: 'wrong')}.not_to change(User, :count)
   end
+  
 end
