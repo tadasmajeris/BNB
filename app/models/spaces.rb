@@ -23,4 +23,10 @@ class Space
 			available_to
 		end
 	end
+
+	def dates_overlap?
+		if available_from.class == Date && available_to.class == Date
+	 		available_to < available_from
+		end
+	end
 end
