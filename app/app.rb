@@ -18,7 +18,11 @@ class Bnb < Sinatra::Base
   set :session_secret, 'super secret'
 
   get '/' do
-    redirect '/users/new'
+    if current_user
+      erb :'/users/index'
+    else
+      redirect '/users/new'
+    end
   end
 
   helpers do
