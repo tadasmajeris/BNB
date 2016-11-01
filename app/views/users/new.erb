@@ -1,15 +1,20 @@
-<form method='get' action='/sessions/new'>
-  <button type='submit'>Sign in</button>
-</form>
-<form action='/users' method='post'>
-  <label for='email'>
-    Email: <input name='email' type='email'></input>
-  </label>
-  <label for='password'>
-    Password: <input name='password' type='password'></input>
-  </label>
-  <label for='password_confirmation'>
-    Confirm your password: <input name='password_confirmation' type='password'></input>
-  </label>
-  <button type='submit'>Sign up</button>
-</form>
+<div class="form_container">
+  <form method='get' action='/sessions/new'>
+    <button class='sign_in_button' type='submit'>Sign in</button>
+  </form>
+</div>
+
+<div class="form_container">
+  <form action='/users' method='post'>
+    <label for='email'>
+      Email: <input name='email' type='email'></input>
+    </label>
+    <label for='password'>
+      Password: <input name='password' type='password'></input>
+    </label>
+    <label for='password_confirmation'>
+      Confirm your password: <input name='password_confirmation' type='password'></input>
+    </label>
+    <button type='submit'>Sign up</button>
+  </form>
+</div>

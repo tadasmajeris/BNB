@@ -2,6 +2,11 @@ h1 {
   text-align: center;
 }
 
+.errors {
+  text-align: center;
+  color: #b22;
+}
+
 a {
   color: #000;
   cursor: pointer;
@@ -14,19 +19,25 @@ a:hover {
 }
 
 .form_container {
-  width: 90%;
+  width: 300px;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
+}
+
+.sign_in_button {
+  margin-bottom: 10px;
 }
 
 form {
-  width: 50%;
+  width: 100%;
   margin: auto;
 }
 
-form input, label, textarea {
+form input, textarea {
+  width: 100%;
   display: block;
   margin: auto;
+  margin-bottom: 5px;
 }
 
 form textarea {
@@ -41,8 +52,21 @@ form label {
 
 form input[type='submit'] {
   margin-top: 10px;
+  width: auto;
 }
 
+.datepicker_label {
+  width: 49.3%;
+  display: inline-block;
+}
+
+.datepicker {
+  display: inline;
+}
+
+#available_from {
+  width: 95%;
+}
 
 #spaces {
   text-align: center;
