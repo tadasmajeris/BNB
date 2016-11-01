@@ -19,6 +19,7 @@ class Bnb < Sinatra::Base
 
   get '/' do
     if current_user
+      @spaces = Space.all
       erb :'/spaces/index'
     else
       redirect '/users/new'
