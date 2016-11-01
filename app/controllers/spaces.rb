@@ -10,7 +10,8 @@ class Bnb < Sinatra::Base
   							 description: params[:description],
   							 price: params[:price_per_night],
   							 available_from: params[:available_from],
-  							 available_to: params[:available_to])
+  							 available_to: params[:available_to],
+  							 user_id: session[:user_id])
 
     if @space.dates_overlap?
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
