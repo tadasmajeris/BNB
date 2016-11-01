@@ -9,14 +9,15 @@ class Bnb < Sinatra::Base
     @user = User.new(email: params[:email],
             password: params[:password],
             password_confirmation: params[:password_confirmation])
-
-    if @user.save
-     session[:user_id] = @user.id
-     redirect to '/'
+    if @user.password.empty?
+      flash.now[:errors] = ["Password must not be blank"]
+    elsif @user.save
+      session[:user_id] = @user.id
+      redirect to '/spaces'
     else
-     flash.now[:errors] = @user.errors.full_messages
-     erb :'/users/new'
-   end
+      flash.now[:errors] = @user.errors.full_messages
+    end
+   erb :'/users/new'
   end
 
 end
