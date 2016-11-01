@@ -11,7 +11,8 @@ class Bnb < Sinatra::Base
   							 price: params[:price_per_night],
   							 available_from: params[:available_from],
   							 available_to: params[:available_to])
-    if @space.available_to < @space.available_from
+    
+    if @space.available_from.class == Date && @space.available_to.class == Date && @space.available_to < @space.available_from
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
   	elsif @space.save
   		redirect '/spaces'
