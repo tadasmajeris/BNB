@@ -1,0 +1,82 @@
+h1 {
+  text-align: center;
+}
+
+.errors {
+  text-align: center;
+  color: #b22;
+}
+
+a {
+  color: #000;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.form_container {
+  width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.sign_in_button {
+  margin-bottom: 10px;
+}
+
+form {
+  width: 100%;
+  margin: auto;
+}
+
+form input, textarea {
+  width: 100%;
+  display: block;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+form textarea {
+  resize: none;
+  width: 300px;
+  height: 80px;
+}
+
+form label {
+  margin-top: 10px;
+}
+
+form input[type='submit'] {
+  margin-top: 10px;
+  width: auto;
+}
+
+.datepicker_label {
+  width: 49.3%;
+  display: inline-block;
+}
+
+.datepicker {
+  display: inline;
+}
+
+#available_from {
+  width: 95%;
+}
+
+#spaces {
+  text-align: center;
+}
+
+#spaces p {
+  margin: 0;
+  display: inline;
+}
+
+#spaces li {
+  list-style: none;
+}
