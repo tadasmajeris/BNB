@@ -16,7 +16,8 @@ class Bnb < Sinatra::Base
     if @space.dates_overlap?
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
   	elsif @space.save
-  		redirect '/spaces'
+      session[:space_id] = @space.id
+  		redirect "/spaces/#{session[:space_id]}"
   	else
   		flash.now[:errors] = @space.errors.full_messages
   	end
@@ -29,6 +30,7 @@ class Bnb < Sinatra::Base
   end
 
   get '/spaces/:id' do
+    @space = Space.get(params[:id])
     erb :'/spaces/book'
   end
 

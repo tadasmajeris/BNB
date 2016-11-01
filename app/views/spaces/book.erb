@@ -1,1 +1,12 @@
-Book a space
+
+<div class="space_description">
+  <p class="space_name"><%= @space.name %></p>
+  <p class="space_description"><%=@space.description %></p>
+  <p class="space_price">£<%= "%.2f" % @space.price %></p>
+  <p class="space_available_from"><%= @space.available_from.strftime("%d/%m/%Y") %> -</p>
+  <p class="space_available_to"><%= @space.available_to.strftime("%d/%m/%Y") %></p>
+</div>
+
+<div class="calendar">
+  
+</div>
