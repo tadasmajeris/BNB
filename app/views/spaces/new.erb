@@ -4,19 +4,21 @@
 	}
 
 	.form_container {
-		width: 90%;
+		width: 300px;
 		margin: 0 auto;
-		text-align: center;
+		text-align: left;
 	}
 
 	form {
-		width: 50%;
+		width: 100%;
 		margin: auto;
 	}
 
-	form input, label, textarea {
+	form input, textarea {
+		width: 100%;
 		display: block;
 		margin: auto;
+		margin-bottom: 5px;
 	}
 
 	form textarea {
@@ -25,12 +27,22 @@
 		height: 80px;
 	}
 
-	form label {
-		margin-top: 10px;
+	.datepicker_label {
+		width: 49.3%;
+		display: inline-block;
+	}
+
+	.datepicker {
+		display: inline;
+	}
+
+	#available_from {
+		width: 95%;
 	}
 
 	form input[type='submit'] {
 		margin-top: 10px;
+		width: auto;
 	}
 
 </style>
@@ -40,7 +52,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $( function() {
-	$( ".datepicker" ).datepicker();
+	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy', minDate: 0 });
 } );
 </script>
 
@@ -49,19 +61,19 @@ $( function() {
 <div class="form_container">
 	<form action="/spaces" method="post">
 		<label for="name">Space name:
-			<input type="text" name="name">
+			<input type="text" name="name" value="<%= @space.name %>">
 		</label>
 		<label for="description">Description:
-			<textarea name="description"></textarea>
+			<textarea name="description"><%= @space.description %></textarea>
 		</label>
-		<label for="price_per_night">Price per Night:
-			<input type="number" step="0.01" name="price_per_night">
+		<label for="price_per_night">Price per night:
+			<input type="number" step="0.01" name="price_per_night" value="<%= @space.price %>">
 		</label>
-		<label for="available_from">Available From:
-			<input class="datepicker" type="text" name="available_from" placeholder="dd/mm/yyyy">
+		<label class='datepicker_label' for="available_from">Available From:
+			<input id='available_from' class="datepicker" type="text" name="available_from" placeholder="dd/mm/yyyy" value="<%= @space.available_from_to_s %>">
 		</label>
-		<label for="available_to">Available To:
-			<input class="datepicker" type="text" name="available_to" placeholder="dd/mm/yyyy">
+		<label class='datepicker_label' for="available_to">Available To:
+			<input class="datepicker" type="text" name="available_to" placeholder="dd/mm/yyyy" value="<%= @space.available_to_to_s %>">
 		</label>
 		<input type="submit" value="List My Space">
 	</form>

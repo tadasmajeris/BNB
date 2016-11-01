@@ -6,20 +6,21 @@ class Bnb < Sinatra::Base
   end
 
   post '/spaces' do
-  	space = Space.new(name: params[:name], 
+  	@space = Space.new(name: params[:name],
   							 description: params[:description],
   							 price: params[:price_per_night],
   							 available_from: params[:available_from],
   							 available_to: params[:available_to])
-  	if space.save
+  	if @space.save
   		redirect '/spaces'
   	else
-  		flash.now[:errors] = space.errors.full_messages
+  		flash.now[:errors] = @space.errors.full_messages
   	end
   	erb :'/spaces/new'
   end
 
   get '/spaces/new' do
+    @space = Space.new
     erb :'/spaces/new'
   end
 
