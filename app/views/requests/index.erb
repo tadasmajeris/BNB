@@ -5,15 +5,31 @@
     <h2>Requests I've made</h2>
 
     <ul>
-      <li>.</li>
+      <% @requests_made.each do |req| %>
+      	<a href="/spaces/<%= req.space.id %>">
+      		<li>
+      			<p><%= req.space.name %></p>
+      			<p><%= req.confirm_message %></p>
+      			<p><%= req.date.strftime("%d/%m/%Y") %></p>
+      		</li>
+      	</a>
+    	<% end %>
     </ul>
   </div>
 
-  <div id='requests_sent'>
+  <div id='requests_received'>
     <h2>Requests I've received</h2>
 
     <ul>
-      <li>.</li>
+      <% @requests_received.each do |req| %>
+      	<a href="/requests/<%= req.id %>">
+      		<li>
+      			<p><%= req.space.name %></p>
+      			<p><%= req.confirm_message %></p>
+      			<p><%= req.date.strftime("%d/%m/%Y") %></p>
+      		</li>
+      	</a>
+    	<% end %>
     </ul>
   </div>
 </div>
