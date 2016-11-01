@@ -2,36 +2,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<style>
-
-	#calendar .ui-datepicker {
-		width: 216px;
-	}
-	
-	#calendar .ui-state-default {
-		background: #007fff;
-		color: #fff;
-		font-weight: bold;
-		text-align: center;
-		border-color: #004fff;
-	}
-
-	#calendar .ui-state-default:hover {
-		background: #04e762;
-		border-color: #04b762;
-		transition: .4s;
-	}
-
-	#calendar .ui-datepicker-header {
-		background: #007fff;
-		color: #fff;		
-	}
-
-	#calendar .ui-icon-circle-triangle-w {
-		color: #004fff;
-	}
-</style>
-
 <div class="space_description">
   <p class="space_name"><%= @space.name %></p>
   <p class="space_description"><%=@space.description %></p>
@@ -44,18 +14,6 @@
   
 </div>
 
-<script>
-	var disableddates = ["21-11-2016", "22-11-2016", "12-25-2014", "12-20-2014"];
+<button id="request_date">Request Date</button>
 
-
-	function DisableSpecificDates(date) {
-  	  var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
-   	  return [disableddates.indexOf(string) == -1];
-  }
-
-	$(function() {
-  	$("#calendar").datepicker({
-    	beforeShowDay: DisableSpecificDates
-  	});
-	});
-</script>
+<script src="/js/calendar.js"></script>
