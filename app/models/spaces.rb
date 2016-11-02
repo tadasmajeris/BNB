@@ -1,6 +1,9 @@
 class Space
 	include DataMapper::Resource
 
+	has n, :requests
+	belongs_to :user
+
 	property :id, Serial
 	property :name, String, required: true
 	property :description, Text, required: true

@@ -6,6 +6,9 @@ class User
   attr_reader :password
   attr_accessor :password_confirmation
 
+  has n, :requests
+  has n, :spaces
+
   validates_confirmation_of :password
 
   property :id, Serial

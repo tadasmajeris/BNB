@@ -2,6 +2,8 @@ require 'spec_helper'
 
 feature 'creating a new space' do
 	scenario 'providing correct details' do
+		sign_up
+		sign_in
 		visit('/spaces/new')
 		fill_in :name, with: 'A new space'
 		fill_in :description, with: 'A big and beautiful new space'

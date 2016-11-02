@@ -80,3 +80,23 @@ form input[type='submit'] {
 #spaces li {
   list-style: none;
 }
+
+#requests_container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#requests_container div {
+  border: 1px solid #ddd;
+  width: 48%;
+  display: inline-block;
+}
+
+#requests_container p {
+  margin: 2px auto;
+}
+
+#requests_received {
+  float: right;
+}
