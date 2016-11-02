@@ -7,11 +7,15 @@ class Bnb < Sinatra::Base
   end
 
   get '/requests/disabled_dates' do
-  	data = {disabledDates: ["21-11-2016", "22-11-2016", "23-11-2016", "26-11-2016"]}.to_json
+  	@requests = Request.all(:space_id => session[:space_id], :conirmed => true)
+  	dates = []
+  	@requests.each { |request| dates << request.date }
+  	data = {disabledDates: dates}.to_json
   end
 
   post '/requests/create' do
-  	p params[:date]
+  	Request.create(space_id: session[:space_id],
+  								 date: params[:date])
+  	redirect '/requests'
   end
-
 end

@@ -31,6 +31,7 @@ class Bnb < Sinatra::Base
 
   get '/spaces/:id' do
     @space = Space.get(params[:id])
+    session[:space_id] = @space.id
     erb :'/spaces/book'
   end
 
