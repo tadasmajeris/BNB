@@ -32,3 +32,13 @@ end
 def save_space
   click_button('List My Space')
 end
+
+def sign_up_and_sign_in(email: 'example@mail.com',
+                        password: 'password')
+  sign_up(email: email, password: password, password_confirmation: password)
+  sign_in(email: email, password: password)
+end
+
+def sign_out
+  click_button('Sign out')  
+end

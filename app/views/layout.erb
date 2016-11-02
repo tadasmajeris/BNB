@@ -24,9 +24,11 @@
 
     <% else %>
 
-      <form method='get' action='/sessions/new'>
-        <button class='sign_in_button' type='submit'>Sign in</button>
-      </form>
+      <% if not_sign_in_page %>
+        <form method='get' action='/sessions/new'>
+          <button id='nav_sign_in' class='sign_in_button' type='submit'>Sign in</button>
+        </form>
+      <% end %>
 
     <% end %>
 

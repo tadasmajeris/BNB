@@ -30,6 +30,10 @@ class Bnb < Sinatra::Base
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
+
+    def not_sign_in_page
+      request.path_info != '/sessions/new'
+    end
   end
 
   # start the server if ruby file executed directly
