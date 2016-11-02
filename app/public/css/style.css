@@ -143,3 +143,18 @@ form input[type='submit'] {
   background: #04e762;
   border-color: #04b762;
 }
+
+/*
+  Image style for spaces
+*/
+
+.image_container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.space_image {
+  width: 216px;
+  height: auto;
+}
+
