@@ -37,11 +37,13 @@ class Bnb < Sinatra::Base
   post "/requests/confirm" do
     request = Request.get(params[:request_id])
     request.update(confirmed: true)
+    redirect '/requests'
   end
 
   delete "/requests/delete" do
     request = Request.get(params[:request_id])
     request.destroy
+    redirect '/requests'
   end
 
 end
