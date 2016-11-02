@@ -28,4 +28,22 @@ class Bnb < Sinatra::Base
   	{disabledDates: dates}.to_json
   end
 
+  get '/requests/:id' do
+    @space_request = Request.get(params[:id])
+    @spaces_booked = Request.no_of_spaces_booked(@space_request.user)
+    erb :'/requests/confirm'
+  end
+
+  post "/requests/confirm" do
+    request = Request.get(params[:request_id])
+    request.update(confirmed: true)
+    redirect '/requests'
+  end
+
+  delete "/requests/delete" do
+    request = Request.get(params[:request_id])
+    request.destroy
+    redirect '/requests'
+  end
+
 end
