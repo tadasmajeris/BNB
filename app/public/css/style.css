@@ -28,6 +28,12 @@ a:hover {
   margin-bottom: 10px;
 }
 
+#space_description {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 form {
   width: 100%;
   margin: auto;
@@ -99,6 +105,11 @@ form input[type='submit'] {
 
 #requests_received {
   float: right;
+}
+
+#calendar {
+  width: 216px;
+  margin: auto;
 }
 
 #calendar .ui-datepicker {
