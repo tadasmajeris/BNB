@@ -5,7 +5,7 @@
 <h1><%= @space.name %></h1>
 
 <div id="space_description">
-	<% if !@space.image_filepath.empty? %>
+	<% if @images %>
 		<div class="image_container">
 			<% @images.each do |filepath| %>
 				<img class="space_image" src=<%= "/imgs/#{@space.name}/#{filepath}" %> alt="">
