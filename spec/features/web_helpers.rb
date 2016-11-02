@@ -15,3 +15,20 @@ def sign_in(email: 'example@mail.com',
   fill_in(:password, with: password)
   click_button('Sign in')
 end
+
+def create_space(name: 'A new space',
+                  description: 'A big and beautiful new space',
+                  price_per_night: '23',
+                  available_from: '10/11/2016',
+                  available_to: '13/11/2016')
+  visit('/spaces/new')
+  fill_in :name, with: name
+  fill_in :description, with: description
+  fill_in :price_per_night, with: price_per_night
+  fill_in :available_from, with: available_from
+  fill_in :available_to, with: available_to
+end
+
+def save_space
+  click_button('List My Space')
+end

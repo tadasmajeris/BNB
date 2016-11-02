@@ -5,15 +5,32 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-  <% if current_user %>
-    Welcome <%= current_user.email %>!
+  <header id='navigation'>
 
-    <form action='/sessions' method='post'>
-      <input type='hidden' name='_method' value='delete' />
-      <button type="submit">Sign out</button>
-    </form>
-    <a href="/spaces/new"><button>List a Space</button></a>
-  <% end %>
+    <% if current_user %>
+
+      <p id="welcome_message">Welcome <%= current_user.email %>!</p>
+
+      <form action='/sessions' method='post'>
+        <input type='hidden' name='_method' value='delete' />
+        <button type="submit">Sign out</button>
+      </form>
+
+      <ul>
+        <li><a href="/requests">Requests</a></li>
+        <li><a href="/spaces">Spaces</a></li>
+        <li><a href="/spaces/new">List a Space</a></li>
+      </ul>
+
+    <% else %>
+
+      <form method='get' action='/sessions/new'>
+        <button class='sign_in_button' type='submit'>Sign in</button>
+      </form>
+
+    <% end %>
+
+  </header>
 
   <% if flash[:errors] && !flash[:errors].empty? %>
     <ul class="errors">

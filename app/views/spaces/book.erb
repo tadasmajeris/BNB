@@ -1,1 +1,24 @@
-Book a space
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<div class="space_description">
+  <p class="space_name"><%= @space.name %></p>
+  <p class="space_description"><%=@space.description %></p>
+  <p class="space_price">£<%= "%.2f" % @space.price %></p>
+  <p class="space_available_from"><%= @space.available_from.strftime("%d/%m/%Y") %> -</p>
+  <p class="space_available_to"><%= @space.available_to.strftime("%d/%m/%Y") %></p>
+</div>
+
+<% if current_user.id != @space.user_id %>
+
+  <div id="calendar"></div>
+
+  <form action="/requests" method="post">
+    <input id='hidden_input' type="hidden" name="date" value="">
+    <button type='submit' id="request_date">Request date</button>
+  </form>
+
+<% end %>
+
+<script src="/js/calendar.js"></script>

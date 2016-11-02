@@ -1,3 +1,5 @@
+require 'json'
+
 class Bnb < Sinatra::Base
 
   get '/requests' do
@@ -8,15 +10,22 @@ class Bnb < Sinatra::Base
 
   post '/requests' do
     if Request.exists?(user_id: current_user.id,
-                    space_id: params[:space_id],
+                    space_id: session[:space_id],
                     date: params[:date])
-      flash.keep[:errors] = ['This request already exists']
-      redirect "/spaces/#{params[:space_id]}"
+      flash.now[:errors] = ['This request already exists']
+      @space = Space.first(id: session[:space_id])
+      erb :"/spaces/book"
     else
-      Request.create(user_id: current_user.id,
-                  space_id: params[:space_id],
+      r = Request.new(user_id: current_user.id,
+                  space_id: session[:space_id],
                   date: params[:date], confirmed: false)
-      redirect '/requests'
+      redirect '/requests' if r.save
     end
   end
+
+  get '/requests/disabled_dates' do
+  	dates = Space.available_dates(session[:space_id])
+  	{disabledDates: dates}.to_json
+  end
+
 end

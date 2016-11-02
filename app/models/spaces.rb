@@ -32,4 +32,12 @@ class Space
 	 		available_to < available_from
 		end
 	end
+
+	def self.available_dates(space_id)
+		space = Space.first(id: space_id)
+		available_dates = (space.available_from..space.available_to).map{ |date| date.strftime("%d/%m/%Y") }
+		requests_made = Request.all(space_id: space_id, confirmed: true)
+  	requests_made.each { |request| available_dates -= [request.date] }
+		available_dates
+	end
 end
