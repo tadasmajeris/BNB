@@ -28,4 +28,8 @@ class Bnb < Sinatra::Base
   	{disabledDates: dates}.to_json
   end
 
+  get '/requests/:id' do
+    @request = Request.get(id: params[:id])
+    erb :'/requests/confirm'
+  end
 end
