@@ -10,6 +10,7 @@ class Space
 	property :price, Float, required: true
 	property :available_from, Date, required: true
 	property :available_to, Date, required: true
+	property :image_filepath, String
 
 	def available_from_to_s
 		if available_from.class == Date

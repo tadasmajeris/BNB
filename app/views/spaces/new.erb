@@ -10,7 +10,7 @@ $( function() {
 <h1>List a Space</h1>
 
 <div class="form_container">
-	<form action="/spaces" method="post">
+	<form action="/spaces" method="post" enctype="multipart/form-data">
 		<label for="name">Space name:
 			<input type="text" name="name" value="<%= @space.name %>">
 		</label>
@@ -25,6 +25,10 @@ $( function() {
 		</label>
 		<label class='datepicker_label' for="available_to">Available To:
 			<input class="datepicker" type="text" name="available_to" placeholder="dd/mm/yyyy" value="<%= @space.available_to_to_s %>">
+		</label>
+
+		<label for="file">Upload an Image:
+			<input type="file" name="file">
 		</label>
 		<input type="submit" value="List My Space">
 	</form>

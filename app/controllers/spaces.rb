@@ -6,16 +6,25 @@ class Bnb < Sinatra::Base
   end
 
   post '/spaces' do
+
+  	@filename = params[:file][:filename]
+  	file = params[:file][:tempfile]
+
+
   	@space = Space.new(name: params[:name],
   							 description: params[:description],
   							 price: params[:price_per_night],
   							 available_from: params[:available_from],
   							 available_to: params[:available_to],
-  							 user_id: session[:user_id])
+  							 user_id: session[:user_id],
+  							 image_filepath: @filename)
 
     if @space.dates_overlap?
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
   	elsif @space.save
+  		File.open("./app/public/imgs/#{@filename}", 'wb') do |f|
+  			f.write(file.read)
+  		end
       session[:space_id] = @space.id
   		redirect "/spaces/#{session[:space_id]}"
   	else

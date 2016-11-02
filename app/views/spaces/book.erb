@@ -5,6 +5,9 @@
 <h1><%= @space.name %></h1>
 
 <div id="space_description">
+	<% if !@space.image_filepath.empty? %>
+		<img src=<%= "/imgs/#{@space.image_filepath}" %> alt="">
+	<% end %>
   <p class="space_description"><%=@space.description %></p>
   <p class="space_price">£<%= "%.2f" % @space.price %></p>
   <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
