@@ -1,32 +1,28 @@
-var disableddates = ["21-11-2016", "22-11-2016", "23-11-2016", "24-11-2016"];
+$(function() {
+	var dates;
 
-
-function DisableSpecificDates(date) {
-	var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
-		return [disableddates.indexOf(string) == -1];
-}
-
-function getDisabledDates() {
 	$.ajax({
 		type: 'get',
 		dataType: 'json',
-		url: '/requests/example',
+		url: '/requests/disabled_dates',
 		success: function(response) {
-			console.log(response.disabledDates)
+
+			dates = response.disabledDates;
+
+			$("#calendar").datepicker({
+		  	beforeShowDay: function(date) {
+		    	var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+					return [dates.indexOf(string) == -1];
+		  	} 
+			});
 		}
 	});
-}
 
-$(function() {
-
-	$("#calendar").datepicker({
-  	beforeShowDay: DisableSpecificDates,
-	});
 
 	$('#request_date').click(function() {
 		$.ajax({
 			type: 'post',
-			url: '/requests/example',
+			url: '/requests/create',
 			data: {date: $('#calendar').val()},
 			success: function() {console.log("success")}
 		});
