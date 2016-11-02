@@ -1,3 +1,5 @@
+require 'yaml'
+
 class Bnb < Sinatra::Base
 
   get '/spaces' do
@@ -6,10 +8,8 @@ class Bnb < Sinatra::Base
   end
 
   post '/spaces' do
-
-  	@filename = params[:file][:filename]
-  	file = params[:file][:tempfile]
-
+    filenames = params[:file].map{ |f| f[:filename]}
+    tempfiles = params[:file].map{ |f| f[:tempfile]}
 
   	@space = Space.new(name: params[:name],
   							 description: params[:description],
@@ -17,14 +17,19 @@ class Bnb < Sinatra::Base
   							 available_from: params[:available_from],
   							 available_to: params[:available_to],
   							 user_id: session[:user_id],
-  							 image_filepath: @filename)
+  							 image_filepath: filenames.to_yaml)
 
     if @space.dates_overlap?
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
   	elsif @space.save
-  		File.open("./app/public/imgs/#{@filename}", 'wb') do |f|
-  			f.write(file.read)
-  		end
+      directory_name = "name"
+      Dir.mkdir("./app/public/imgs/#{params[:name]}")
+      filenames.each_with_index do |filename, index|
+        tempfile = tempfiles[index]
+        File.open("./app/public/imgs/#{params[:name]}/#{filename}", 'wb') do |f|
+  			f.write(tempfile.read)
+  		  end
+      end
       session[:space_id] = @space.id
   		redirect "/spaces/#{session[:space_id]}"
   	else
@@ -40,6 +45,7 @@ class Bnb < Sinatra::Base
 
   get '/spaces/:id' do
     @space = Space.get(params[:id])
+    @images = YAML.load(@space.image_filepath)
     session[:space_id] = @space.id
     erb :'/spaces/book'
   end

@@ -6,7 +6,9 @@
 
 <div id="space_description">
 	<% if !@space.image_filepath.empty? %>
-		<img src=<%= "/imgs/#{@space.image_filepath}" %> alt="">
+		<% @images.each do |filepath| %>
+			<img src=<%= "/imgs/#{@space.name}/#{filepath}" %> alt="">
+		<% end %>
 	<% end %>
   <p class="space_description"><%=@space.description %></p>
   <p class="space_price">£<%= "%.2f" % @space.price %></p>
