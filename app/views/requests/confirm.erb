@@ -4,11 +4,11 @@
 <p><%= @space_request.date.strftime("%d/%m/%Y") %></p>
 <p>No. of Spaces booked: <%= @spaces_booked %></p>
 
-<form action="/request/confirm" method="post">
-  <button type="button" name="request_id" value="<%= @space_request.id %>">Confirm request from <%= @space_request.user.email %></button>
+<form action="/requests/confirm" method="post">
+  <button type="submit" name="request_id" value="<%= @space_request.id %>">Confirm request from <%= @space_request.user.email %></button>
 </form>
 
-<form action="/request/delete" method="post">
+<form action="/requests/delete" method="post">
   <input type='hidden' name='_method' value='delete' />
-  <button type="button" name="request_id" value="<%= @space_request.id %>">Deny request from <%= @space_request.user.email %></button>
+  <button type="submit" name="request_id" value="<%= @space_request.id %>">Deny request from <%= @space_request.user.email %></button>
 </form>
