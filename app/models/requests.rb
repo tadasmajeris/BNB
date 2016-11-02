@@ -20,4 +20,8 @@ class Request
     end
     @requests
   end
+
+	def self.exists?(user_id: nil, space_id: nil, date: '')
+		!Request.first(user_id: user_id, space_id: space_id, date: date).nil?
+	end
 end

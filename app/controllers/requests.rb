@@ -7,10 +7,16 @@ class Bnb < Sinatra::Base
   end
 
   post '/requests' do
-    Request.create(user_id: current_user.id,
+    if Request.exists?(user_id: current_user.id,
+                    space_id: params[:space_id],
+                    date: params[:date])
+      flash.keep[:errors] = ['This request already exists']
+      redirect "/spaces/#{params[:space_id]}"
+    else
+      Request.create(user_id: current_user.id,
                   space_id: params[:space_id],
                   date: params[:date], confirmed: false)
-    redirect '/requests'
+      redirect '/requests'
+    end
   end
-
 end
