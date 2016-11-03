@@ -28,6 +28,10 @@ a:hover {
   margin-bottom: 10px;
 }
 
+#navigation p, form, ul, li {
+  display: inline;
+}
+
 #space_description {
   width: 80%;
   margin: 0 auto;
@@ -86,6 +90,16 @@ form input[type='submit'] {
 #spaces li {
   list-style: none;
 }
+
+#spaces_container {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+#spaces_container li {
+  display: block;
+}
+
 
 #requests_container {
   width: 80%;
@@ -156,4 +170,3 @@ form input[type='submit'] {
 .space_image {
   height: 162px;
 }
-

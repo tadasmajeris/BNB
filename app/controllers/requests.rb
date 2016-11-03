@@ -32,7 +32,6 @@ class Bnb < Sinatra::Base
 
   get '/requests/disabled_dates' do
   	dates = Space.available_dates(session[:space_id])
-    p dates
   	{disabledDates: dates}.to_json
   end
 
@@ -54,7 +53,7 @@ class Bnb < Sinatra::Base
 
   delete "/requests/delete" do
     request = Request.get(params[:request_id])
-    request.destroy if !request.confirmed
+    request.destroy unless request.confirmed
     redirect '/requests'
   end
 
