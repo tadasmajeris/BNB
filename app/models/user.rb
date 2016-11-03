@@ -30,4 +30,13 @@ class User
       nil
     end
   end
+
+  def requests_received
+    @requests = []
+    @spaces = Space.all(user_id: id)
+    @spaces.each do |space|
+      @requests += Request.all(space_id: space.id)
+    end
+    @requests
+  end
 end
