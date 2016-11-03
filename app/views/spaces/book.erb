@@ -8,7 +8,7 @@
 	<% if @images %>
 		<div class="image_container">
 			<% @images.each do |filepath| %>
-				<img class="space_image" src=<%= "/imgs/#{@space.name.gsub(' ','_')}/#{filepath}" %> alt="">
+				<img class="space_image" src=<%= "/imgs/#{@space.id}/#{filepath}" %> alt="">
 			<% end %>
 		</div>
 	<% end %>
@@ -28,6 +28,31 @@
       <button type='submit' id="request_date" disabled="true">Request date</button>
     </form>
 
+	<% elsif current_user.id == @space.user_id %>
+	<div class="form_container">
+		<form action="/spaces/update" method="post" enctype="multipart/form-data">
+			<label for="name">Space name:
+				<input type="text" name="name" value="<%= @space.name %>">
+			</label>
+			<label for="description">Description:
+				<textarea name="description"><%= @space.description %></textarea>
+			</label>
+			<label for="price_per_night">Price per night:
+				<input type="number" step="0.01" name="price_per_night" value="<%= @space.price %>">
+			</label>
+			<label class='datepicker_label' for="available_from">Available From:
+				<input id='available_from' class="datepicker" type="text" name="available_from" placeholder="dd/mm/yyyy" value="<%= @space.available_from_to_s %>">
+			</label>
+			<label class='datepicker_label' for="available_to">Available To:
+				<input class="datepicker" type="text" name="available_to" placeholder="dd/mm/yyyy" value="<%= @space.available_to_to_s %>">
+			</label>
+
+			<label for="file">Upload an Image:
+				<input type="file" name="file[]" multiple>
+			</label>
+			<input type="submit" value="List My Space">
+		</form>
+	</div>
   <% end %>
 </div>
 
