@@ -41,4 +41,8 @@ class Space
   	requests_made.each { |request| available_dates -= [request.date] }
 		available_dates
 	end
+
+	def self.is_available?(id: '', date: '')
+		self.available_dates(id).include?(date)
+	end
 end

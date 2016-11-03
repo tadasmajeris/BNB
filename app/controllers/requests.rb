@@ -9,17 +9,20 @@ class Bnb < Sinatra::Base
   end
 
   post '/requests' do
+    @space = Space.first(id: session[:space_id])
     if Request.exists?(user_id: current_user.id,
                     space_id: session[:space_id],
                     date: params[:date])
-      flash.now[:errors] = ['This request already exists']
-      @space = Space.first(id: session[:space_id])
+      flash.now[:errors] = ['You have already made this request']
       erb :"/spaces/book"
-    else
+    elsif Space.is_available?(id: @space.id, date: params[:date])
       r = Request.new(user_id: current_user.id,
-                  space_id: session[:space_id],
+                  space_id: @space.id,
                   date: params[:date], confirmed: false)
       redirect '/requests' if r.save
+    else
+      flash.now[:errors] = ['Space is not available for this date']
+      erb :"/spaces/book"
     end
   end
 
