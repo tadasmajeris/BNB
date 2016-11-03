@@ -27,6 +27,7 @@ class Bnb < Sinatra::Base
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
   	elsif @space.save
       if params[:file]
+      	
       	Dir.mkdir("./app/public/imgs/#{params[:name]}")
 	      filenames.each_with_index do |filename, index|
 	        tempfile = tempfiles[index]
