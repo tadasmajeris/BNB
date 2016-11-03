@@ -8,7 +8,7 @@ class Bnb < Sinatra::Base
   end
 
   post '/spaces' do
-    if params[:file]  
+    if params[:file]
     	filenames = params[:file].map{ |f| f[:filename]}
       tempfiles = params[:file].map{ |f| f[:tempfile]}
     else
@@ -27,10 +27,11 @@ class Bnb < Sinatra::Base
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
   	elsif @space.save
       if params[:file]
-      	Dir.mkdir("./app/public/imgs/#{params[:name]}")
+          name = params[:name].gsub(' ','_')
+      	Dir.mkdir("./app/public/imgs/#{name}")
 	      filenames.each_with_index do |filename, index|
 	        tempfile = tempfiles[index]
-	        File.open("./app/public/imgs/#{params[:name]}/#{filename}", 'wb') do |f|
+	        File.open("./app/public/imgs/#{name}/#{filename}", 'wb') do |f|
 	  			f.write(tempfile.read)
 	  		  end
 	      end
