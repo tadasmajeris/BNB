@@ -34,6 +34,12 @@ class Bnb < Sinatra::Base
     def not_sign_in_page
       request.path_info != '/sessions/new'
     end
+
+    def create_directory(dirname)
+      Dir.mkdir(dirname)
+    end
+
+    
   end
 
   # start the server if ruby file executed directly

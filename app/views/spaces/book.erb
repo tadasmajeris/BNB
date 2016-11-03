@@ -8,7 +8,7 @@
 	<% if @images %>
 		<div class="image_container">
 			<% @images.each do |filepath| %>
-				<img class="space_image" src=<%= "/imgs/#{@space.name.gsub(' ','_')}/#{filepath}" %> alt="">
+				<img class="space_image" src=<%= "/imgs/#{@space.id}/#{filepath}" %> alt="">
 			<% end %>
 		</div>
 	<% end %>

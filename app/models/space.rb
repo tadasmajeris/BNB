@@ -10,7 +10,7 @@ class Space
 	property :price, Float, required: true
 	property :available_from, Date, required: true
 	property :available_to, Date, required: true
-	property :image_filepath, String
+	property :image_filepath, Text
 
 	def available_from_to_s
 		if available_from.class == Date
@@ -45,4 +45,29 @@ class Space
 	def self.is_available?(id: '', date: '')
 		self.available_dates(id).include?(date)
 	end
+
+	def save_images(filenames,tempfiles,space_id)
+    filenames.each_with_index do |filename, index|
+        tempfile = tempfiles[index]
+        File.open("./app/public/imgs/#{space_id}/#{filename}", 'wb') do |f|
+          f.write(tempfile.read)
+        end
+    end
+  end
+
+	def update_space(params)
+		self.update(name: params[:name]) if params[:name]
+    self.update(description: params[:description]) if params[:description]
+    self.update(price: params[:price_per_night]) if params[:price_per_night]
+    self.update(available_from: params[:available_from]) if params[:available_from]
+    self.update(available_to: params[:available_to]) if params[:available_to]
+    if params[:file]
+      filenames = params[:file].map{ |f| f[:filename]}
+      tempfiles = params[:file].map{ |f| f[:tempfile]}
+      current_filepath = YAML.load(self.image_filepath)
+      new_filepath = current_filepath + filenames
+      Space.get(id).update(image_filepath: new_filepath.to_yaml)
+      self.save_images(filenames,tempfiles,self.id)
+    end
+  end
 end

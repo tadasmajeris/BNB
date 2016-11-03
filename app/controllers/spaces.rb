@@ -28,13 +28,8 @@ class Bnb < Sinatra::Base
   	elsif @space.save
       if params[:file]
         name = params[:name].gsub(' ','_')
-      	Dir.mkdir("./app/public/imgs/#{name}")
-	      filenames.each_with_index do |filename, index|
-	        tempfile = tempfiles[index]
-	        File.open("./app/public/imgs/#{name}/#{filename}", 'wb') do |f|
-	  			  f.write(tempfile.read)
-	  		  end
-	      end
+      	create_directory("./app/public/imgs/#{@space.id}")
+	      @space.save_images(filenames,tempfiles,@space.id)
 	    end
       session[:space_id] = @space.id
   		redirect "/spaces/#{session[:space_id]}"
@@ -58,16 +53,10 @@ class Bnb < Sinatra::Base
 
   post '/spaces/update' do
     @space = Space.get(session[:space_id])
-    filepath = ("./app/public/imgs/#{@space.name.gsub(' ','_')}")
-    @space.name = params[:name] if params[:name]
-    @space.description = params[:description] if params[:description]
-    @space.price = params[:price_per_night] if params[:price_per_night]
-    @space.available_from = params[:available_from] if params[:available_from]
-    @space.available_to = params[:available_to] if params[:available_to]
-    @space.save
-    if params[:name]
-      File.rename(filepath, "./app/public/imgs/#{@space.name.gsub(' ','_')}")
-    end
+    old_name = @space.name.gsub(" ","_")
+    filepath = "./app/public/imgs/#{@space.id}"
+    @space.update_space(params)
+
     redirect '/spaces'
   end
 
