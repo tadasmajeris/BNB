@@ -56,4 +56,19 @@ class Bnb < Sinatra::Base
     erb :'/spaces/book'
   end
 
+  post '/spaces/update' do
+    @space = Space.get(session[:space_id])
+    filepath = ("./app/public/imgs/#{@space.name.gsub(' ','_')}")
+    @space.name = params[:name] if params[:name]
+    @space.description = params[:description] if params[:description]
+    @space.price = params[:price_per_night] if params[:price_per_night]
+    @space.available_from = params[:available_from] if params[:available_from]
+    @space.available_to = params[:available_to] if params[:available_to]
+    @space.save
+    if params[:name]
+      File.rename(filepath, "./app/public/imgs/#{@space.name.gsub(' ','_')}")
+    end
+    redirect '/spaces'
+  end
+
 end

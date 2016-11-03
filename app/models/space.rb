@@ -41,4 +41,13 @@ class Space
   	requests_made.each { |request| available_dates -= [request.date] }
 		available_dates
 	end
+
+	# private
+	#
+	# def name=(value)
+	# 	if value.is_a? String
+	# 		self.name = value
+	# 	end
+	# end
+
 end
