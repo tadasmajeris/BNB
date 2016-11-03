@@ -14,7 +14,10 @@ $(function() {
 		  	beforeShowDay: function(date) {
 		    	var string = jQuery.datepicker.formatDate('dd/mm/yy', date);
 					return [dates.indexOf(string) >= 0];
-		  	}
+		  	},
+				onSelect: function(){
+					$('#request_date').prop('disabled', false);
+				}
 			});
 		}
 	});

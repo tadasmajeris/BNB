@@ -28,6 +28,7 @@ class Bnb < Sinatra::Base
 
   get '/requests/disabled_dates' do
   	dates = Space.available_dates(session[:space_id])
+    p dates
   	{disabledDates: dates}.to_json
   end
 
