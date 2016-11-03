@@ -3,9 +3,13 @@ require 'json'
 class Bnb < Sinatra::Base
 
   get '/requests' do
-    @requests_made = current_user.requests || []
-    @requests_received = Request.requests_received_for(current_user)
-    erb :'/requests/index'
+    if current_user
+      @requests_made = current_user.requests || []
+      @requests_received = Request.requests_received_for(current_user)
+      erb :'/requests/index'
+    else
+      redirect '/'
+    end
   end
 
   post '/requests' do
@@ -32,9 +36,13 @@ class Bnb < Sinatra::Base
   end
 
   get '/requests/:id' do
-    @space_request = Request.get(params[:id])
-    @spaces_booked = Request.no_of_spaces_booked(@space_request.user)
-    erb :'/requests/confirm'
+    if current_user
+      @space_request = Request.get(params[:id])
+      @spaces_booked = Request.no_of_spaces_booked(@space_request.user)
+      erb :'/requests/confirm'
+    else
+      redirect '/'
+    end
   end
 
   post "/requests/confirm" do
