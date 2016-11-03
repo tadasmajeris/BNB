@@ -48,4 +48,13 @@ feature 'managing the requests' do
     expect(request).to be nil
   end
 
+  scenario 'after I confirmed a request the buttons should disappear' do
+    visit("/requests/#{@request.id}")
+    click_button("Confirm request from #{@request.user.email}")
+    visit("/requests/#{@request.id}")
+    expect(page).not_to have_button("Confirm request from #{@request.user.email}")
+    expect(page).not_to have_button("Deny request from #{@request.user.email}")
+    expect(page).to have_content("Request is confirmed")
+  end
+
 end

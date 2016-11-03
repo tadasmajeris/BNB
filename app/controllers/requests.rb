@@ -42,7 +42,7 @@ class Bnb < Sinatra::Base
 
   delete "/requests/delete" do
     request = Request.get(params[:request_id])
-    request.destroy
+    request.destroy if !request.confirmed
     redirect '/requests'
   end
 
