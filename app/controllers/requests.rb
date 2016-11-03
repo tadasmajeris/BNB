@@ -5,7 +5,7 @@ class Bnb < Sinatra::Base
   get '/requests' do
     if current_user
       @requests_made = current_user.requests || []
-      @requests_received = Request.requests_received_for(current_user)
+      @requests_received = current_user.requests_received
       erb :'/requests/index'
     else
       redirect '/'
