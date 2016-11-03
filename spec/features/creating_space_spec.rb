@@ -2,8 +2,7 @@ require 'spec_helper'
 
 feature 'creating a new space' do
 	scenario 'providing correct details' do
-		sign_up
-		sign_in
+		sign_up_and_sign_in
 		create_space
 		expect { click_button('List My Space') }.to change(Space,:count).by(1)
 		expect(page).to have_content('A new space')
@@ -14,6 +13,7 @@ feature 'creating a new space' do
 	end
 
 	scenario 'providing incorrect details' do
+		sign_up_and_sign_in
 		visit('/spaces/new')
 		expect{ click_button('List My Space') }.not_to change(Space,:count)
 		expect(page).to have_content('Name must not be blank')
@@ -23,7 +23,4 @@ feature 'creating a new space' do
 		expect(page).to have_content('Available to must not be blank')
 	end
 
-	scenario 'available to date cant be before available from' do
-
-	end
 end
