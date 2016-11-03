@@ -57,4 +57,18 @@ feature 'managing the requests' do
     expect(page).to have_content("Request is confirmed")
   end
 
+  scenario 'I can cancel my request' do
+    sign_out
+    sign_in(email: 'example2@mail.com',
+            password: 'hellomum')
+    visit('/requests')
+    click_button("Cancel")
+    request = Request.first(user_id: @request.user.id,
+                            space_id: @space.id,
+                            date: @request.date.strftime("%d/%m/%Y"))
+    expect(request).to be nil
+  end
+
+
+
 end
