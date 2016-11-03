@@ -66,7 +66,7 @@ class Space
       tempfiles = params[:file].map{ |f| f[:tempfile]}
       current_filepath = YAML.load(self.image_filepath)
       new_filepath = current_filepath + filenames
-      Space.get(id).update(image_filepath: new_filepath.to_yaml)
+      self.update(image_filepath: new_filepath.to_yaml)
       self.save_images(filenames,tempfiles,self.id)
     end
   end

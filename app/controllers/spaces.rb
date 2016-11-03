@@ -26,9 +26,9 @@ class Bnb < Sinatra::Base
     if @space.dates_overlap?
       flash.now[:errors] = ["Available from date must not overlap Available to date"]
   	elsif @space.save
+      create_directory("./app/public/imgs/#{@space.id}")
       if params[:file]
         name = params[:name].gsub(' ','_')
-      	create_directory("./app/public/imgs/#{@space.id}")
 	      @space.save_images(filenames,tempfiles,@space.id)
 	    end
       session[:space_id] = @space.id
@@ -57,7 +57,7 @@ class Bnb < Sinatra::Base
     filepath = "./app/public/imgs/#{@space.id}"
     @space.update_space(params)
 
-    redirect '/spaces'
+    redirect "/spaces/#{@space.id}"
   end
 
 end
