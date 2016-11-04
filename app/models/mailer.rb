@@ -25,11 +25,33 @@ class Mailer
               html_body: "Hello there. Take a look at your beautiful space here: <a href=#{full_url}>View your space</a>")
   end
 
-  def self.space_requested(email, url, date)
+  # emailing user that request was made
+  def self.request_made(email, url, date)
     full_url = create_url(url)
     Pony.mail(to: email,
               subject: 'Your space request!',
               html_body: "Hello there. Thank you for requesting <a href=#{full_url}>this space</a> for this date #{date}")
   end
 
+  # emailing the owner of the space
+  def self.space_requested(email, request)
+    space = Space.get(request.space_id)
+    date = request.date.strftime("%d/%m/%Y")
+    full_url = create_url("/requests/#{request.id}")
+    Pony.mail(to: email,
+              subject: 'Your space got a request!',
+              html_body: "Hello there. <br/> Your space <a href=#{full_url}>#{space.name}</a> got a new request for this date #{date}!  ")
+  end
+
+  def self.space_confirmed(email, space, date)
+    Pony.mail(to: email,
+              subject: 'Your request has been confirmed!',
+              html_body: "Hello there. Your request to stay at #{space} on #{date} has been confirmed. Have a nice stay!")
+  end
+
+  def self.space_denied(email, space, date)
+    Pony.mail(to: email,
+              subject: 'Sorry but your request has been declined :(',
+              html_body: "Hello there. Your request to stay at #{space} on #{date} has been declined. Very sorry!!!")
+  end
 end
