@@ -24,7 +24,7 @@ class Bnb < Sinatra::Base
                   space_id: @space.id,
                   date: params[:date], confirmed: false)
       if r.save
-        Mailer.new.space_requested(current_user.email, "/spaces/#{@space.id}", params[:date])
+        Mailer.space_requested(current_user.email, "/spaces/#{@space.id}", params[:date])
         redirect '/requests'
       end
     else
