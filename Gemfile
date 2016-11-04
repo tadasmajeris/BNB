@@ -9,6 +9,8 @@ gem 'bcrypt'
 gem 'rake'
 gem 'pony'
 gem 'stripe'
+gem 'envyable'
+gem 'twilio-ruby'
 
 group :test do
   gem 'rspec'

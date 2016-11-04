@@ -16,6 +16,7 @@ class User
   property :id, Serial
   property :email, String, format: :email_address, required: true, unique: true
   property :password_digest, Text
+  property :phone_number, String
 
   def password=(password)
     @password = password
@@ -38,5 +39,9 @@ class User
       @requests += Request.all(space_id: space.id)
     end
     @requests
+  end
+
+  def has_a_phone_number? 
+    !self.phone_number.empty?
   end
 end

@@ -8,7 +8,8 @@ class Bnb < Sinatra::Base
   post '/users' do
     @user = User.new(email: params[:email],
             password: params[:password],
-            password_confirmation: params[:password_confirmation])
+            password_confirmation: params[:password_confirmation],
+            phone_number: params[:phone_number] || "")
     if @user.password.empty?
       flash.now[:errors] = ["Password must not be blank"]
     elsif @user.save
