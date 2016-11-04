@@ -23,7 +23,10 @@ class Bnb < Sinatra::Base
       r = Request.new(user_id: current_user.id,
                   space_id: @space.id,
                   date: params[:date], confirmed: false)
-      redirect '/requests' if r.save
+      if r.save
+        Mailer.new.space_requested(current_user.email, "/spaces/#{@space.id}", params[:date])
+        redirect '/requests'
+      end
     else
       flash.now[:errors] = ['Space is not available for this date']
       erb :"/spaces/book"

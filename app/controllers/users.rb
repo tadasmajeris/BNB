@@ -12,9 +12,7 @@ class Bnb < Sinatra::Base
     if @user.password.empty?
       flash.now[:errors] = ["Password must not be blank"]
     elsif @user.save
-      # url = request.url
-      # url.gsub!('/users', '/spaces')
-      Mailer.new.send_welcome(@user.email, url)
+      Mailer.new.send_welcome(@user.email, '/spaces')
       session[:user_id] = @user.id
       redirect to '/spaces'
     else
