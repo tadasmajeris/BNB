@@ -29,6 +29,7 @@ class Bnb < Sinatra::Base
       create_directory("./app/public/imgs/#{@space.id}")
 	    @space.save_images(filenames,tempfiles,@space.id) if params[:file]
       session[:space_id] = @space.id
+      Mailer.new.space_created(current_user.email, "spaces/#{@space.id}")
   		redirect "/spaces/#{@space.id}"
   	else
   		flash.now[:errors] = @space.errors.full_messages
