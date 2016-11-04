@@ -2,6 +2,7 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
 require 'sinatra/flash'
+require 'pony'
 require_relative 'controllers/requests'
 require_relative 'controllers/sessions'
 require_relative 'controllers/spaces'
@@ -39,7 +40,7 @@ class Bnb < Sinatra::Base
       Dir.mkdir(dirname)
     end
 
-    
+
   end
 
   # start the server if ruby file executed directly
