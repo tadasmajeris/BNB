@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 require 'pony'
+require_relative 'models/mailer'
 require_relative 'controllers/requests'
 require_relative 'controllers/sessions'
 require_relative 'controllers/spaces'
