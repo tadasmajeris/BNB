@@ -13,7 +13,14 @@
       			<p><%= req.date.strftime("%d/%m/%Y") %></p>
       		</li>
       	</a>
-        <% if !req.confirmed %>
+        <% if req.confirmed %>
+          <form action="/payment" method="post">
+            <button type="submit" name="request_id" value="<%= req.id %>">Pay</button>
+          </form>
+          <!-- <form action="/payment" method="get">
+            <button type="submit">Pay</button>
+          </form> -->
+        <% else %>
           <form action="/requests/delete" method="post">
             <input type='hidden' name='_method' value='delete'/>
             <button type="submit" name="request_id" value="<%= req.id %>">Cancel</button>
