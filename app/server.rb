@@ -39,9 +39,5 @@ class Bnb < Sinatra::Base
     def not_sign_in_page
       request.path_info != '/sessions/new'
     end
-
-    def create_directory(dirname)
-      Dir.mkdir(dirname) unless Dir.exists?(dirname)
-    end
   end
 end
