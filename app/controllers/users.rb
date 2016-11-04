@@ -12,11 +12,7 @@ class Bnb < Sinatra::Base
     if @user.password.empty?
       flash.now[:errors] = ["Password must not be blank"]
     elsif @user.save
-      url = request.url
-      url.gsub!('/users', '/spaces')
-      Pony.mail(to: @user.email,
-                subject: 'Welcome to Team3 AirBNB',
-                body: "Hello there. Take a look at our beautiful spaces here: #{url}")
+      Mailer.new.send_welcome(@user.email, '/spaces')
       session[:user_id] = @user.id
       redirect to '/spaces'
     else
