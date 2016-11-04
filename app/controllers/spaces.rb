@@ -10,7 +10,7 @@ class Bnb < Sinatra::Base
   post '/spaces' do
   	@space = Space.new(name: params[:name],
   							      description: params[:description],
-  							      price: params[:price_per_night],
+  							      price: params[:price],
   							      available_from: params[:available_from],
   							      available_to: params[:available_to],
   							      user_id: current_user.id)

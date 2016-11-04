@@ -47,13 +47,19 @@ class Space
 	end
 
 	def update_space(params)
-		name = params[:name] 							 			 if params[:name] != self.name
-		description = params[:description] 			 if params[:description] != self.description
-		price = params[:price_per_night] 	 			 if params[:price_per_night] != self.price
-		available_from = params[:available_from] if params[:available_from] != self.available_from
-		available_to = params[:available_to] 	 	 if params[:available_to] != self.available_to
-		self.update(name: name, description: description, price: price, available_from: available_from, available_to: available_to )
+		new_params = {}
 
-    Image.create_images(self, params[:files]) if params[:files]
+		params.each do |k, v|
+			if self.respond_to?(k)
+				value_in_db = self.send(k)
+
+				if (value_in_db.class == Date && value_in_db.strftime("%d/%m/%Y") != v) || value_in_db.to_s != v
+					new_params[k] = v
+				end
+			end
+		end
+
+		self.update(new_params)
+		Image.create_images(self, params[:files]) if params[:files]
   end
 end
