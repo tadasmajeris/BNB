@@ -15,8 +15,11 @@ class Bnb < Sinatra::Base
   set :root, File.join(File.dirname(__FILE__))
   set :views, Proc.new { File.join(root, "views") }
 
-  set :publishable_key, 'pk_test_2StPwa94fXVHt3m8UZFMCZGQ'
-  set :secret_key, 'sk_test_QuWgs7KNbOWITZWWwN7cdRhB'
+  # set :publishable_key, 'pk_test_2StPwa94fXVHt3m8UZFMCZGQ'
+  # set :secret_key, 'sk_test_QuWgs7KNbOWITZWWwN7cdRhB'
+
+  set :publishable_key, ENV['PUBLISHABLE_KEY']
+  set :secret_key, ENV['SECRET_KEY']
 
   Stripe.api_key = settings.secret_key
 

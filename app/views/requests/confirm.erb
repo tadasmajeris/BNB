@@ -6,7 +6,7 @@
   <p><%= @space_request.date.strftime("%d/%m/%Y") %></p>
   <p>No. of Spaces booked: <%= @spaces_booked %></p>
 
-  <% if !@space_request.confirmed %>
+  <% unless @space_request.confirmed %>
 
     <form action="/requests/confirm" method="post">
       <button type="submit" name="request_id" value="<%= @space_request.id %>">Confirm request from <%= @space_request.user.email %></button>
