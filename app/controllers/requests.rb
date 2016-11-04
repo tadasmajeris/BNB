@@ -20,11 +20,12 @@ class Bnb < Sinatra::Base
       flash.now[:errors] = ['You have already made this request']
       erb :"/spaces/book"
     elsif Space.is_available?(id: @space.id, date: params[:date])
-      r = Request.new(user_id: current_user.id,
+      request = Request.new(user_id: current_user.id,
                   space_id: @space.id,
                   date: params[:date], confirmed: false)
-      if r.save
-        Mailer.space_requested(current_user.email, "/spaces/#{@space.id}", params[:date])
+      if request.save
+        owner = User.get(@space.user_id)
+        Mailer.space_requested(owner.email, request)
         redirect '/requests'
       end
     else
@@ -51,12 +52,16 @@ class Bnb < Sinatra::Base
   post "/requests/confirm" do
     request = Request.get(params[:request_id])
     request.update(confirmed: true)
+    Mailer.space_confirmed(request.user.email, request.space.name, request.date.strftime("%d/%m/%Y"))
     redirect '/requests'
   end
 
   delete "/requests/delete" do
     request = Request.get(params[:request_id])
-    request.destroy unless request.confirmed
+    unless request.confirmed
+      Mailer.space_denied(request.user.email, request.space.name, request.date.strftime("%d/%m/%Y"))
+      request.destroy
+    end
     redirect '/requests'
   end
 

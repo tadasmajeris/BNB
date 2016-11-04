@@ -54,7 +54,7 @@ class Bnb < Sinatra::Base
     old_name = @space.name.gsub(" ","_")
     filepath = "./app/public/imgs/#{@space.id}"
     @space.update_space(params)
-    Mailer.space_updated(@user.email, "/spaces/#{@space.id}")
+    Mailer.space_updated(current_user.email, "/spaces/#{@space.id}")
     redirect "/spaces/#{@space.id}"
   end
 
