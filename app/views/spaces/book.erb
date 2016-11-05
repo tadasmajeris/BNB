@@ -8,21 +8,28 @@ $( function() {
 } );
 </script>
 
-<h1><%= @space.name %></h1>
+<div class="row">
+	
+
+<h1 class="text-center"><%= @space.name %></h1>
 
 <div id="space_description">
 
 	<% if @space.images %>
-		<div class="image_container">
-			<% @space.images.each do |image| %>
-				<img class="space_image" src=<%= image.url %> alt="">
+		<div class=".row">
+			<% @space.images.each do |image| %>	
+				<div class="thumbnail center-block col-sm-3">
+					<img src=<%= image.url %> alt="">
+				</div>
 			<% end %>
 		</div>
 	<% end %>
-
-  <p class="space_description"><%=@space.description %></p>
-  <p class="space_price">£<%= "%.2f" % @space.price %></p>
-  <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
+	
+	<div class="col-sm-12 space_details text-center">
+	  <p class="space_description"><%=@space.description %></p>
+	  <p class="space_price">£<%= "%.2f" % @space.price %></p>
+	  <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
+	</div>
 
   <% if current_user.nil? %>
     <p>You must be logged in to book</p>
@@ -38,32 +45,53 @@ $( function() {
 
 	<% elsif current_user.id == @space.user_id %>
 
-		<div class="form_container">
-			<form action="/spaces/<%= @space.id %>" method="post" enctype="multipart/form-data">
-				<label for="name">Space name:
-					<input type="text" name="name" value="<%= @space.name %>">
-				</label>
-				<label for="description">Description:
-					<textarea name="description"><%= @space.description %></textarea>
-				</label>
-				<label for="price">Price per night:
-					<input type="number" step="0.01" name="price" value="<%= @space.price %>">
-				</label>
-				<label class='datepicker_label' for="available_from">Available From:
-					<input id='available_from' class="datepicker" type="text" name="available_from" placeholder="dd/mm/yyyy" value="<%= @space.available_from_to_s %>">
-				</label>
-				<label class='datepicker_label' for="available_to">Available To:
-					<input class="datepicker" type="text" name="available_to" placeholder="dd/mm/yyyy" value="<%= @space.available_to_to_s %>">
-				</label>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<h1 class="text-center">List a Space</h1>
 
-				<label for="files">Upload an Image:
-					<input type="file" name="files[]" multiple>
-				</label>
-				<input type="submit" value="List My Space">
-			</form>
+				<form class="text-center" role="form" action="/spaces" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="name">Space name:
+							<input class="form-control" type="text" name="name" value="<%= @space.name %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label for="description">Description:
+							<textarea class="form-control" name="description"><%= @space.description %></textarea>
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label for="price">Price per night:
+							<input class="form-control" type="number" step="0.01" name="price" value="<%= @space.price %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label class='datepicker_label' for="available_from">Available From:
+							<input class="datepicker form-control" type="text" name="available_from" placeholder="dd/mm/yyyy" value="<%= @space.available_from_to_s %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label class='datepicker_label' for="available_to">Available To:
+							<input class="datepicker form-control" type="text" name="available_to" placeholder="dd/mm/yyyy" value="<%= @space.available_to_to_s %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label for="files">Upload an Image:
+							<input class="btn" type="file" name="files[]" multiple>
+						</label>
+					</div>
+					<button class="btn btn-primary" type="submit">List My Space</button>
+				</form>
+			</div>
 		</div>
 
   <% end %>
+</div>
 </div>
 
 <script src="/js/calendar.js"></script>

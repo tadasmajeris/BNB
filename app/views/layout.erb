@@ -2,46 +2,65 @@
 <html>
 <head>
   <title>Makers BnB</title>
+  <link href = "//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel = "stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
   <header id='navigation'>
 
-    <% if current_user %>
+    <div class="container">
+      <div class="row clearfix">
 
-      <p id="welcome_message">Welcome <%= current_user.email %>!</p>
-
-      <form action='/sessions' method='post'>
-        <input type='hidden' name='_method' value='delete' />
-        <button type="submit">Sign out</button>
-      </form>
-
-      <ul>
-        <li><a href="/requests">Requests</a></li>
-        <li><a href="/spaces">Spaces</a></li>
-        <li><a href="/spaces/new">List a Space</a></li>
-      </ul>
-
-    <% else %>
-
-      <% if not_sign_in_page %>
-        <form method='get' action='/sessions/new'>
-          <button id='nav_sign_in' class='sign_in_button' type='submit'>Sign in</button>
-        </form>
-      <% end %>
-
-    <% end %>
+      <p id="logo" class="pull-left"><a href="/">Team 3's BNB</a></p>
+    
+        <ul class="nav nav-pills pull-right">
+          <% if current_user %>
+            <li class="acitve">
+              <a href="/requests">Requests
+                <span class = "badge pull-right"><%= current_user.requests_received.count %></span>
+              </a>
+            </li>
+            <li><a href="/spaces">Spaces</a></li>
+            <li><a href="/spaces/new">List a Space</a></li>
+            <li>
+              <form action="/sessions" method="post" >
+                <input type="hidden" name="_method" value="delete">
+                <button type='submit' class="btn">Sign out</button>
+              </form>
+            </li>
+          <% else %>
+            <li><a href="/users/new" class="btn">Sign Up</a></li>
+            <% if not_sign_in_page %>
+              <li><a href="/sessions/new">Sign In</a></li>
+            <% end %>
+          <% end %> 
+        </ul>
+      </div> 
+      <div class="row">
+        <% if current_user %>
+          <button type ="button" class = "btn btn-default btn-xs pull-right">
+            <span class = "glyphicon glyphicon-user"></span> 
+             <%= current_user.email %>
+          </button>
+        <% end %>
+      </div>
+      <div class="row">
+        <% if flash[:errors] && !flash[:errors].empty? %>
+          <ul class="errors">
+            <% flash[:errors].each do |error| %>
+            <li class="alert alert-danger"><%= error %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
 
   </header>
 
-  <% if flash[:errors] && !flash[:errors].empty? %>
-    <ul class="errors">
-      <% flash[:errors].each do |error| %>
-      <li><%= error %></li>
-      <% end %>
-    </ul>
-  <% end %>
 
-  <%= yield %>
+
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>
