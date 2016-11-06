@@ -1,13 +1,14 @@
 $(function() {
 	var dates;
+	var space_id = window.location.pathname.replace('/spaces','');
 
 	$.ajax({
 		type: 'get',
 		dataType: 'json',
-		url: '/requests/disabled_dates',
-		success: function(response) {
+		url: `/spaces/${space_id}/available_dates`,
 
-			dates = response.disabledDates;
+		success: function(response) {
+			dates = response.availableDates;
 
 			$("#calendar").datepicker({
 				dateFormat: 'dd/mm/yy',

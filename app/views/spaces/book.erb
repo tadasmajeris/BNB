@@ -9,7 +9,7 @@ $( function() {
 </script>
 
 <div class="row">
-	
+
 
 <h1 class="text-center"><%= @space.name %></h1>
 
@@ -17,26 +17,28 @@ $( function() {
 
 	<% if @space.images %>
 		<div class=".row">
-			<% @space.images.each do |image| %>	
+			<% @space.images.each do |image| %>
 				<div class="thumbnail center-block col-sm-3">
 					<img src=<%= image.url %> alt="">
 				</div>
 			<% end %>
 		</div>
 	<% end %>
-	
+
 	<div class="col-sm-12 space_details text-center">
 	  <p class="space_description"><%=@space.description %></p>
 	  <p class="space_price">£<%= "%.2f" % @space.price %></p>
 	  <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
 	</div>
 
+	<div id="calendar"></div>
+
   <% if current_user.nil? %>
     <p>You must be logged in to book</p>
 
   <% elsif current_user.id != @space.user_id %>
 
-    <div id="calendar"></div>
+
     <br />
     <form action="/requests" method="post">
       <input id='hidden_input' type="hidden" name="date" value="">
