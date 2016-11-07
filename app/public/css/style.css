@@ -1,124 +1,75 @@
-h1 {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Abel');
+h1, h2, h3, h4, p, button, input, textarea, label, a {
+  font-family: 'Abel', sans-serif;
 }
 
-.errors {
-  text-align: center;
-  color: #b22;
+ul {
+  list-style-type: none;
 }
 
-a {
-  color: #000;
-  cursor: pointer;
-  text-decoration: underline;
+body, html {
+  background-color: #F2F1EC;
 }
 
-a:hover {
-  cursor: pointer;
-  text-decoration: none;
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }
 
-.form_container {
-  width: 300px;
-  margin: 0 auto;
-  text-align: left;
+#logo {
+  height: 100%;
 }
 
-.sign_in_button {
-  margin-bottom: 10px;
+#navigation {
+  margin-bottom: -20px;
 }
 
-#navigation p, form, ul, li {
+.space_available_from, .space_available_to {
   display: inline;
+}
+
+.caption .btn {
+  display: block;
+}
+
+.panel img {
+  width: 100%;
+  height: auto;
+  padding-bottom: 15px;
+}
+
+.panel .panel-heading {
+  margin-bottom: 15px;
+}
+
+.panel a.btn {
+  display: block;
+}
+
+.space_panel:hover {
+  color: #8da;
+}
+
+.request_link p {
+  margin: 0;
+}
+
+.center form {
+  display: inline-block;
 }
 
 #space_description {
-  width: 80%;
-  margin: 0 auto;
+  margin-top: -20px;
   text-align: center;
 }
 
-form {
-  width: 100%;
-  margin: auto;
+#space_description .thumbnail {
+  max-width: 291px;
 }
 
-form input, textarea {
-  width: 100%;
-  display: block;
-  margin: auto;
-  margin-bottom: 5px;
-}
-
-form textarea {
-  resize: none;
-  width: 300px;
-  height: 80px;
-}
-
-form label {
-  margin-top: 10px;
-}
-
-form input[type='submit'] {
-  margin-top: 10px;
-  width: auto;
-}
-
-.datepicker_label {
-  width: 49.3%;
-  display: inline-block;
-}
-
-.datepicker {
-  display: inline;
-}
-
-#available_from {
-  width: 95%;
-}
-
-#spaces {
-  text-align: center;
-}
-
-#spaces p {
-  margin: 0;
-  display: inline;
-}
-
-#spaces li {
-  list-style: none;
-}
-
-#spaces_container {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-}
-#spaces_container li {
-  display: block;
-}
-
-
-#requests_container {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-#requests_container div {
-  border: 1px solid #ddd;
-  width: 48%;
-  display: inline-block;
-}
-
-#requests_container p {
-  margin: 2px auto;
-}
-
-#requests_received {
-  float: right;
+#space_description .thumbnail img {
+  max-height: 215px;
 }
 
 #calendar {
@@ -127,8 +78,8 @@ form input[type='submit'] {
 }
 
 #calendar .ui-datepicker {
-    width: 216px;
-  }
+  width: 216px;
+}
 
 #calendar .ui-state-default {
   background: #007fff;
@@ -141,7 +92,7 @@ form input[type='submit'] {
 #calendar .ui-state-default:hover {
   background: #04e762;
   border-color: #04b762;
-  transition: .4s;
+  transition: .3s;
 }
 
 #calendar .ui-datepicker-header {
@@ -156,17 +107,4 @@ form input[type='submit'] {
 #calendar .ui-state-active {
   background: #04e762;
   border-color: #04b762;
-}
-
-/*
-  Image style for spaces
-*/
-
-.image_container {
-  width: 70%;
-  margin: 0 auto;
-}
-
-.space_image {
-  height: 162px;
 }

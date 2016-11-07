@@ -1,69 +1,96 @@
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script>
-$( function() {
-	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy', minDate: 0 });
-} );
-</script>
-
-<h1><%= @space.name %></h1>
-
 <div id="space_description">
 
+	<h1 class="text-center"><%= @space.name %></h1>
+
 	<% if @space.images %>
-		<div class="image_container">
-			<% @space.images.each do |image| %>
-				<img class="space_image" src=<%= image.url %> alt="">
-			<% end %>
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+					<% @space.images.each do |image| %>
+						<div class="thumbnail" style="display: inline-block;">
+							<img src=<%= image.url %> alt="">
+						</div>
+					<% end %>
+			</div>
+			<div class="col-sm-2"></div>
 		</div>
 	<% end %>
 
-  <p class="space_description"><%=@space.description %></p>
-  <p class="space_price">£<%= "%.2f" % @space.price %></p>
-  <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
-
-  <% if current_user.nil? %>
-    <p>You must be logged in to book</p>
-
-  <% elsif current_user.id != @space.user_id %>
-
-    <div id="calendar"></div>
-    <br />
-    <form action="/requests" method="post">
-      <input id='hidden_input' type="hidden" name="date" value="">
-      <button type='submit' id="request_date" disabled="true">Request date</button>
-    </form>
-
-	<% elsif current_user.id == @space.user_id %>
-
-		<div class="form_container">
-			<form action="/spaces/<%= @space.id %>" method="post" enctype="multipart/form-data">
-				<label for="name">Space name:
-					<input type="text" name="name" value="<%= @space.name %>">
-				</label>
-				<label for="description">Description:
-					<textarea name="description"><%= @space.description %></textarea>
-				</label>
-				<label for="price">Price per night:
-					<input type="number" step="0.01" name="price" value="<%= @space.price %>">
-				</label>
-				<label class='datepicker_label' for="available_from">Available From:
-					<input id='available_from' class="datepicker" type="text" name="available_from" placeholder="dd/mm/yyyy" value="<%= @space.available_from_to_s %>">
-				</label>
-				<label class='datepicker_label' for="available_to">Available To:
-					<input class="datepicker" type="text" name="available_to" placeholder="dd/mm/yyyy" value="<%= @space.available_to_to_s %>">
-				</label>
-
-				<label for="files">Upload an Image:
-					<input type="file" name="files[]" multiple>
-				</label>
-				<input type="submit" value="List My Space">
-			</form>
+	<div class="row">
+		<div class="col-sm-12 space_details text-center">
+		  <p class="space_description"><%=@space.description %></p>
+		  <p class="space_price">£<%= "%.2f" % @space.price %></p>
+		  <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
 		</div>
+	</div>
 
-  <% end %>
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6">
+		  <% if current_user.nil? %>
+		    <p>You must be logged in to book</p>
+
+		  <% elsif current_user.id != @space.user_id %>
+
+				<div id="calendar" class="datepicker"></div>
+		    <br />
+		    <form action="/requests" method="post">
+		      <input id='hidden_input' type="hidden" name="date" value="">
+		      <button class="btn btn-primary" type='submit' id="request_date">Request date</button>
+		    </form>
+
+			<% elsif current_user.id == @space.user_id %>
+				<h1 class="text-center">Update your Space</h1>
+
+				<form class="text-center" role="form" action="/spaces" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="name">Space name:
+							<input class="form-control" type="text" name="name" value="<%= @space.name %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label for="description">Description:
+							<textarea class="form-control" name="description"><%= @space.description %></textarea>
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label for="price">Price per night:
+							<input class="form-control" type="number" step="0.01" name="price" value="<%= @space.price %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label class='datepicker_label' for="available_from">Available From:
+							<input class="datepicker form-control" type="text" name="available_from" placeholder="dd/mm/yyyy" value="<%= @space.available_from_to_s %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label class='datepicker_label' for="available_to">Available To:
+							<input class="datepicker form-control" type="text" name="available_to" placeholder="dd/mm/yyyy" value="<%= @space.available_to_to_s %>">
+						</label>
+					</div>
+
+					<div class="form-group">
+						<label for="files">Upload an Image:
+							<input class="btn" type="file" name="files[]" multiple>
+						</label>
+					</div>
+					<button class="btn btn-primary" type="submit">List My Space</button>
+				</form>
+	  	<% end %>
+		</div>
+		<div class="col-sm-3"></div>
+	</div>
+
 </div>
+
 
 <script src="/js/calendar.js"></script>

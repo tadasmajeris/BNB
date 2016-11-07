@@ -13,6 +13,7 @@ class Bnb < Sinatra::Base
   end
 
   post '/requests' do
+    p session[:space_id]
     @space = Space.first(id: session[:space_id])
     if Request.exists?(user_id: current_user.id,
                     space_id: session[:space_id],
@@ -32,11 +33,6 @@ class Bnb < Sinatra::Base
       flash.now[:errors] = ['Space is not available for this date']
       erb :"/spaces/book"
     end
-  end
-
-  get '/requests/disabled_dates' do
-  	dates = Space.available_dates(session[:space_id])
-  	{disabledDates: dates}.to_json
   end
 
   get '/requests/:id' do

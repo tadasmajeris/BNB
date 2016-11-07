@@ -1,5 +1,14 @@
 class Bnb < Sinatra::Base
 
+  before do
+    @spaces = Space.all
+    @spaces.each do |space|
+      if Date.today > space.available_from
+        space.update(available_from: Date.today)
+      end
+    end
+  end
+
   get '/spaces' do
   	@spaces = Space.all
     erb :'/spaces/index'
@@ -31,7 +40,13 @@ class Bnb < Sinatra::Base
 
   get '/spaces/:id' do
     @space = Space.get(params[:id])
+    session[:space_id] = @space.id
     erb :'/spaces/book'
+  end
+
+  get '/available_dates/:id' do
+  	dates = Space.available_dates(params[:id])
+  	{availableDates: dates}.to_json
   end
 
   post '/spaces/:id' do
