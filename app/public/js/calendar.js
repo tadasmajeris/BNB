@@ -1,11 +1,12 @@
-$(function() {
+$(document).ready(function() {
 	var dates;
-	var space_id = window.location.pathname.replace('/spaces','');
+	var availableUrl = window.location.pathname.replace('/spaces','/available_dates');
+	$('#request_date').prop('disabled', true);
 
 	$.ajax({
 		type: 'get',
 		dataType: 'json',
-		url: `/spaces/${space_id}/available_dates`,
+		url: availableUrl,
 
 		success: function(response) {
 			dates = response.availableDates;

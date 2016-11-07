@@ -1,55 +1,51 @@
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script>
-$( function() {
-	$( ".datepicker" ).datepicker({ dateFormat: 'dd/mm/yy', minDate: 0 });
-} );
-</script>
-
-<div class="row">
-
-
-<h1 class="text-center"><%= @space.name %></h1>
-
 <div id="space_description">
 
+	<h1 class="text-center"><%= @space.name %></h1>
+
 	<% if @space.images %>
-		<div class=".row">
-			<% @space.images.each do |image| %>
-				<div class="thumbnail center-block col-sm-3">
-					<img src=<%= image.url %> alt="">
-				</div>
-			<% end %>
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+					<% @space.images.each do |image| %>
+						<div class="thumbnail" style="display: inline-block;">
+							<img src=<%= image.url %> alt="">
+						</div>
+					<% end %>
+			</div>
+			<div class="col-sm-2"></div>
 		</div>
 	<% end %>
 
-	<div class="col-sm-12 space_details text-center">
-	  <p class="space_description"><%=@space.description %></p>
-	  <p class="space_price">£<%= "%.2f" % @space.price %></p>
-	  <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
+	<div class="row">
+		<div class="col-sm-12 space_details text-center">
+		  <p class="space_description"><%=@space.description %></p>
+		  <p class="space_price">£<%= "%.2f" % @space.price %></p>
+		  <p class="space_available_dates">Available dates: <%= @space.available_from.strftime("%d/%m/%Y") %> - <%= @space.available_to.strftime("%d/%m/%Y") %></p>
+		</div>
 	</div>
 
-	<div id="calendar"></div>
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6">
+		  <% if current_user.nil? %>
+		    <p>You must be logged in to book</p>
 
-  <% if current_user.nil? %>
-    <p>You must be logged in to book</p>
+		  <% elsif current_user.id != @space.user_id %>
 
-  <% elsif current_user.id != @space.user_id %>
+				<div id="calendar" class="datepicker"></div>
+		    <br />
+		    <form action="/requests" method="post">
+		      <input id='hidden_input' type="hidden" name="date" value="">
+		      <button class="btn btn-primary" type='submit' id="request_date">Request date</button>
+		    </form>
 
-
-    <br />
-    <form action="/requests" method="post">
-      <input id='hidden_input' type="hidden" name="date" value="">
-      <button type='submit' id="request_date" disabled="true">Request date</button>
-    </form>
-
-	<% elsif current_user.id == @space.user_id %>
-
-		<div class="row">
-			<div class="col-sm-6 col-sm-offset-3">
-				<h1 class="text-center">List a Space</h1>
+			<% elsif current_user.id == @space.user_id %>
+				<h1 class="text-center">Update your Space</h1>
 
 				<form class="text-center" role="form" action="/spaces" method="post" enctype="multipart/form-data">
 					<div class="form-group">
@@ -89,11 +85,12 @@ $( function() {
 					</div>
 					<button class="btn btn-primary" type="submit">List My Space</button>
 				</form>
-			</div>
+	  	<% end %>
 		</div>
+		<div class="col-sm-3"></div>
+	</div>
 
-  <% end %>
 </div>
-</div>
+
 
 <script src="/js/calendar.js"></script>

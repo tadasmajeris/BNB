@@ -3,9 +3,9 @@ ul {
 }
 
 .vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }
 
 #logo {
@@ -39,7 +39,8 @@ ul {
 }
 
 #space_description {
-  display: block;
+  margin-top: -20px;
+  text-align: center;
 }
 
 #space_description .thumbnail {
@@ -48,4 +49,41 @@ ul {
 
 #space_description .thumbnail img {
   max-height: 215px;
+}
+
+#calendar {
+  width: 216px;
+  margin: auto;
+}
+
+#calendar .ui-datepicker {
+    width: 216px;
+  }
+
+#calendar .ui-state-default {
+  background: #007fff;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  border-color: #004fff;
+}
+
+#calendar .ui-state-default:hover {
+  background: #04e762;
+  border-color: #04b762;
+  transition: .3s;
+}
+
+#calendar .ui-datepicker-header {
+  background: #007fff;
+  color: #fff;
+}
+
+#calendar .ui-icon-circle-triangle-w {
+  color: #004fff;
+}
+
+#calendar .ui-state-active {
+  background: #04e762;
+  border-color: #04b762;
 }
