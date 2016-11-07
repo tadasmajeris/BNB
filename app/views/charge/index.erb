@@ -8,6 +8,6 @@
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key=<%= ENV['PUBLISHABLE_KEY'] %>
           data-description="A month's subscription"
-          data-amount=<%= @amount %>
+          data-amount=<%= @amount*100 %>
           data-locale="auto"></script>
 </form>
