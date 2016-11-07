@@ -13,7 +13,6 @@ class Bnb < Sinatra::Base
   end
 
   post '/requests' do
-    p session[:space_id]
     @space = Space.first(id: session[:space_id])
     if Request.exists?(user_id: current_user.id,
                     space_id: session[:space_id],
@@ -27,6 +26,7 @@ class Bnb < Sinatra::Base
       if request.save
         owner = User.get(@space.user_id)
         Mailer.space_requested(owner.email, request)
+        Text.send(owner.phone_number,"You just recieved a request to rent #{@space.name} by #{current_user.email}") if owner.has_a_phone_number?
         redirect '/requests'
       end
     else
@@ -49,6 +49,7 @@ class Bnb < Sinatra::Base
     request = Request.get(params[:request_id])
     request.update(confirmed: true)
     Mailer.space_confirmed(request.user.email, request.space.name, request.date.strftime("%d/%m/%Y"))
+    Text.send(request.user.phone_number,"#{current_user.email} just confirmed your request to rent #{request.space.name} on #{request.date}") if request.user.has_a_phone_number?
     redirect '/requests'
   end
 
@@ -56,6 +57,7 @@ class Bnb < Sinatra::Base
     request = Request.get(params[:request_id])
     unless request.confirmed
       Mailer.space_denied(request.user.email, request.space.name, request.date.strftime("%d/%m/%Y"))
+      Text.send(request.user.phone_number,"#{current_user.email} just denied your request to rent #{request.space.name} on #{request.date}") if request.user.has_a_phone_number?
       request.destroy
     end
     redirect '/requests'
