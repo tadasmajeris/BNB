@@ -2,6 +2,8 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require 'pony'
 require 'stripe'
+require 'envyable'
+
 require_relative 'models/mailer'
 require_relative 'models/text'
 require_relative 'controllers/requests'
