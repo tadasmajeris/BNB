@@ -1,6 +1,6 @@
-<h1>Request for <%= @space_request.space.name %></h1>
+<h1 class="text-center">Request for <%= @space_request.space.name %></h1>
 
-<div class="form_container">
+<div class="form_container text-center">
 
   <p>From: <%= @space_request.user.email %></p>
   <p><%= @space_request.date.strftime("%d/%m/%Y") %></p>
@@ -9,12 +9,12 @@
   <% unless @space_request.confirmed %>
 
     <form action="/requests/confirm" method="post">
-      <button type="submit" name="request_id" value="<%= @space_request.id %>">Confirm request from <%= @space_request.user.email %></button>
+      <button class="btn btn-default" type="submit" name="request_id" value="<%= @space_request.id %>">Confirm request from <%= @space_request.user.email %></button>
     </form>
 
     <form action="/requests/delete" method="post">
       <input type='hidden' name='_method' value='delete' />
-      <button type="submit" name="request_id" value="<%= @space_request.id %>">Deny request from <%= @space_request.user.email %></button>
+      <button class="btn btn-default" type="submit" name="request_id" value="<%= @space_request.id %>">Deny request from <%= @space_request.user.email %></button>
     </form>
   <% else %>
     <p>

@@ -11,46 +11,48 @@
     <div class="container">
       <div class="row clearfix">
 
-      <p id="logo" class="pull-left"><a href="/">Team 3's BNB</a></p>
-    
+      <p id="logo" class="pull-left btn"><a href="/">Team 3's BNB</a></p>
+
         <ul class="nav nav-pills pull-right">
           <% if current_user %>
-            <li class="acitve">
+            <li class="btn-link acitve">
               <a href="/requests">Requests
                 <span class = "badge pull-right"><%= current_user.requests_received.count %></span>
               </a>
             </li>
-            <li><a href="/spaces">Spaces</a></li>
-            <li><a href="/spaces/new">List a Space</a></li>
-            <li>
+            <li class='btn-link'><a href="/spaces">Spaces</a></li>
+            <li class='btn-link'><a href="/spaces/new">List a Space</a></li>
+            <li class='btn-link'>
               <form action="/sessions" method="post" >
                 <input type="hidden" name="_method" value="delete">
-                <button type='submit' class="btn">Sign out</button>
+                <button type='submit' class="btn btn-link" style="padding: 9px">Sign out</button>
               </form>
             </li>
           <% else %>
-            <li><a href="/users/new" class="btn">Sign Up</a></li>
+            <li class='btn-link'><a href="/users/new" class="btn">Sign Up</a></li>
             <% if not_sign_in_page %>
-              <li><a href="/sessions/new">Sign In</a></li>
+              <li class='btn-link' style="padding: 1px"><a href="/sessions/new">Sign In</a></li>
             <% end %>
-          <% end %> 
+          <% end %>
         </ul>
-      </div> 
+      </div>
       <div class="row">
         <% if current_user %>
-          <button type ="button" class = "btn btn-default btn-xs pull-right">
-            <span class = "glyphicon glyphicon-user"></span> 
+          <button type ="button" class="btn btn-default btn-xs pull-right">
+            <span class = "glyphicon glyphicon-user"></span>
              <%= current_user.email %>
           </button>
         <% end %>
       </div>
-      <div class="row">
+      <div class="row text-center">
         <% if flash[:errors] && !flash[:errors].empty? %>
-          <ul class="errors">
+          <div class="col-sm-4"></div>
+          <ul class="errors col-sm-4">
             <% flash[:errors].each do |error| %>
-            <li class="alert alert-danger"><%= error %></li>
+            <li class="alert alert-danger" style="padding:2px; margin:0;"><%= error %></li>
             <% end %>
           </ul>
+          <div class="col-sm-4"></div>
         <% end %>
       </div>
     </div>
