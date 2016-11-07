@@ -47,7 +47,7 @@
 			<% elsif current_user.id == @space.user_id %>
 				<h1 class="text-center">Update your Space</h1>
 
-				<form class="text-center" role="form" action="/spaces" method="post" enctype="multipart/form-data">
+				<form class="text-center" role="form" action="/spaces/<%= @space.id %>" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="name">Space name:
 							<input class="form-control" type="text" name="name" value="<%= @space.name %>">
